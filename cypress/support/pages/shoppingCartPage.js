@@ -5,8 +5,7 @@ export class ShoppingCartPage {
     }
 
     returnProductPrice(product){
-        const productPrice = cy.get('p').contains(product).siblings('p#productPrice')
-        return productPrice
+        return cy.get('p').contains(product).siblings('p#productPrice')
     }
 
     returnTotalPrice(){
