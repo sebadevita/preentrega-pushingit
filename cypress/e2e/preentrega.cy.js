@@ -33,7 +33,8 @@ describe('Preentrega', () => {
     onlineShopPage.closeModal()
     onlineShopPage.clickShoppingCartButton()
 
-    const number = 1
+    shoppingCartPage.returnProductName(testData.products.redCap).should('have.text', testData.products.redCap)
+    shoppingCartPage.returnProductName(testData.products.whitePants).should('have.text', testData.products.whitePants)
 
     shoppingCartPage.returnProductPrice(testData.products.whitePants).should('have.text', `$${testData.products.priceWhitePants}`)
     shoppingCartPage.returnProductPrice(testData.products.redCap).should('have.text', `$${testData.products.priceRedCap}`)
