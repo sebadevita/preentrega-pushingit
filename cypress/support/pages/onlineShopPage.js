@@ -2,7 +2,7 @@ export class OnlineShopPage {
 
 
     addProduct(product) {
-         cy.get('p').contains(product).siblings('button').contains('Add to cart').click()
+        cy.get(`[value="${product}"]`).click()
     
     }
 
