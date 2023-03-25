@@ -4,6 +4,7 @@ import {LoginPage} from '../support/pages/loginPage'
 import {HomePage} from '../support/pages/homePage'
 import {OnlineShopPage} from '../support/pages/onlineShopPage'
 import {ShoppingCartPage} from '../support/pages/shoppingCartPage'
+import {CheckoutPage} from '../support/pages/checkoutPage'
 
 describe('Entrega final', () => { 
     let productsData
@@ -13,6 +14,7 @@ describe('Entrega final', () => {
     const homePage = new HomePage()
     const onlineShopPage = new OnlineShopPage()
     const shoppingCartPage = new ShoppingCartPage()
+    const checkoutPage = new CheckoutPage()
     
     before('Before', () => {
         cy.fixture("productsFixture").then(data => { productsData = data})
@@ -75,7 +77,23 @@ describe('Entrega final', () => {
             shoppingCartPage.clickShowTotalPrice()   
             
             shoppingCartPage.returnTotalPrice().should('have.text', `${productsData.products.priceRedCap + productsData.products.priceWhitePants}`)
+            
+            shoppingCartPage.goToCheckout()
 
+            checkoutPage.typeName(checkoutData.checkout.name)
+            checkoutPage.typeLastName(checkoutData.checkout.lastName)
+            checkoutPage.typeCard(checkoutData.checkout.card)
+
+            checkoutPage.purchase()
+
+            cy.wait(10000)
+
+            checkoutPage.returnCheckoutFullName(checkoutData.checkout.name, checkoutData.checkout.lastName).should('have.text', `${checkoutData.checkout.name} ${checkoutData.checkout.lastName} has succesfully purchased the following items`)
+            checkoutPage.returnCheckoutCard().should('have.text', `${checkoutData.checkout.card}`)
+            checkoutPage.returnCheckoutProducts(productsData.products.redCap).should('have.text', `${productsData.products.priceRedCap}`)
+            checkoutPage.returnCheckoutProducts(productsData.products.whitePants).should('have.text', `${productsData.products.whitePants}`)
+
+            
     
     })
 
