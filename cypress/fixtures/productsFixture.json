@@ -1,0 +1,10 @@
+{
+    "products":{
+        "whitePants": "White Pants",
+        "priceWhitePants": 20,
+        "redCap": "Red Cap",
+        "priceRedCap": 10
+
+        
+    }
+}

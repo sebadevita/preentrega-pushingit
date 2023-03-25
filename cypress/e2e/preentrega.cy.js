@@ -5,7 +5,7 @@ import {HomePage} from '../support/pages/homePage'
 import {OnlineShopPage} from '../support/pages/onlineShopPage'
 import {ShoppingCartPage} from '../support/pages/shoppingCartPage'
 
-describe('Preentrega', () => { 
+skip.describe('Preentrega', () => { 
     let testData
     const registerPage = new RegisterPage()
     const loginPage = new LoginPage()

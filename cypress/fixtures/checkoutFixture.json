@@ -1,0 +1,7 @@
+{
+    "checkout":{
+        "name": "Sebastian",
+        "apellido": "Perez",
+        "tarjeta": 1234567887654321
+    }
+}
