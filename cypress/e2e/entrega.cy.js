@@ -1,16 +1,15 @@
 /// <reference types="cypress" />
-import {RegisterPage} from '../support/pages/registerPage'
-import {LoginPage} from '../support/pages/loginPage'
+
 import {HomePage} from '../support/pages/homePage'
 import {OnlineShopPage} from '../support/pages/onlineShopPage'
 import {ShoppingCartPage} from '../support/pages/shoppingCartPage'
 import {CheckoutPage} from '../support/pages/checkoutPage'
 
+
 describe('Entrega final', () => { 
     let productsData
     let checkoutData
-    const registerPage = new RegisterPage()
-    const loginPage = new LoginPage()
+   
     const homePage = new HomePage()
     const onlineShopPage = new OnlineShopPage()
     const shoppingCartPage = new ShoppingCartPage()
@@ -86,14 +85,13 @@ describe('Entrega final', () => {
 
             checkoutPage.purchase()
 
-            cy.wait(10000)
+            cy.waitCircleCharge()
 
             checkoutPage.returnCheckoutFullName(checkoutData.checkout.name, checkoutData.checkout.lastName).should('have.text', `${checkoutData.checkout.name} ${checkoutData.checkout.lastName} has succesfully purchased the following items`)
             checkoutPage.returnCheckoutCard().should('have.text', `${checkoutData.checkout.card}`)
-            checkoutPage.returnCheckoutProducts(productsData.products.redCap).should('have.text', `${productsData.products.priceRedCap}`)
+            checkoutPage.returnCheckoutProducts(productsData.products.redCap).should('have.text', `${productsData.products.redCap}`)
             checkoutPage.returnCheckoutProducts(productsData.products.whitePants).should('have.text', `${productsData.products.whitePants}`)
-
-            
+            checkoutPage.returnCheckoutTotalPrice().should('have.text', `You have spent $${productsData.products.priceRedCap + productsData.products.priceWhitePants}`)
     
     })
 

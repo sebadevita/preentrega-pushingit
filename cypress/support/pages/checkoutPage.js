@@ -4,6 +4,7 @@ export class CheckoutPage{
         this.nameInput = '#FirstName'
         this.lastNameInput = '#lastName'
         this.cardInput = '#cardNumber'
+        this.totalPrice = '#totalPrice'
 
     }
     
@@ -32,7 +33,13 @@ export class CheckoutPage{
         return cy.get('#creditCard')
     }
 
-    // returnCheckoutProducts(product){
-    //     return cy.get('p').contains(product)
-    // }
+    returnCheckoutProducts(product){
+        return cy.xpath(`//p[text()='${product}']`);
+
+    }
+
+    returnCheckoutTotalPrice(){
+        return cy.get(this.totalPrice);
+
+    }
 };
